@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../redux/thunks/fetchData";
+import { fetchData } from "../../redux/thunks/fetchData";
 
 const Home = () => {
 
@@ -13,10 +13,8 @@ const Home = () => {
 
     const data = useSelector(state => state.data);
 
-    console.log(data);
-
     return (
-        <View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>Hello, world!</Text>
         </View>
     )

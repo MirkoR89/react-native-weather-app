@@ -1,18 +1,20 @@
-import React from 'react';
-import { SafeAreaView, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux';
-import Home from './src/components/Home';
+import BottomNavigation from './src/components/layout/BottomNavigation';
 import store from './src/redux/store';
 
-const App = () => {
 
+const App = () => {
 	return (
 		<Provider store={store}>
-			<SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-				<StatusBar barStyle={'dark-content'} />
-				<Home />
+			<SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<NavigationContainer>
+					<BottomNavigation />
+				</NavigationContainer>
 			</SafeAreaView>
 		</Provider>
-	);
+	)
 }
+
 export default App
