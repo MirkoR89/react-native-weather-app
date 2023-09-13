@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../redux/thunks/fetchData";
 import WeatherCard from "../layout/WeatherCard";
 
-const Home = () => {
+const Home = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
@@ -37,7 +37,7 @@ const Home = () => {
                 data &&
                 <FlatList
                     data={data}
-                    renderItem={({ item }) => <WeatherCard card={item} />}
+                    renderItem={({ item }) => <WeatherCard card={item} navigation={navigation} />}
                     keyExtractor={(item) => item.name}
                 >
                 </FlatList>

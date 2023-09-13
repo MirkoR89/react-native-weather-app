@@ -1,11 +1,12 @@
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 const BottomTab = ({ state, navigation, active, setActive }) => {
-
     return (
         <View style={[styles.container, styles.shadowProp]}>
             {
                 state.routes.map((route, index) => {
+
+                    if (route.name === 'WeatherDetails') return
 
                     const onPress = () => {
                         const event = navigation.emit({
@@ -32,9 +33,11 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
                                 borderBottomColor: route.name === active ? '#01175F' : '#FFF'
                             }}>
                             <View style={styles.icon}>
-                                {route.name === 'Home' && <Image source={require('../../assets/icons/Home.png')} />}
-                                {route.name === 'Search' && <Image source={require('../../assets/icons/Search.png')} />}
-                                {route.name === 'Location' && <Image source={require('../../assets/icons/Location.png')} />}
+                                <Image source={
+                                    route.name === 'Home' ? require('../../assets/icons/Home.png') :
+                                        route.name === 'Search' ? require('../../assets/icons/Search.png') :
+                                            require('../../assets/icons/Location.png')
+                                } />
                             </View>
                         </Pressable>
 

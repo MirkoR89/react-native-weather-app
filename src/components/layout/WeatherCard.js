@@ -1,7 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native"
-import LinearGradient from "react-native-linear-gradient"
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 
-const WeatherCard = ({ card }) => {
+const WeatherCard = ({ card, navigation }) => {
 
     let icon
     let bgGradient
@@ -29,36 +29,41 @@ const WeatherCard = ({ card }) => {
     }
 
     return (
-        <LinearGradient
-            colors={bgGradient}
-            style={[styles.container, styles.shadowProp]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+        <Pressable
+            title={card.name}
+            onPress={() => navigation.navigate('WeatherDetails', { card, bgGradient, icon })}
         >
-            <View style={styles.place}>
-                <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26 }}>
-                    {card.name}
-                </Text>
-                <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
-                    {card.date},
-                </Text>
-                <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
-                    {card.day}
-                </Text>
-                <Text style={{ marginTop: 12, color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
-                    {card.time}
-                </Text>
-            </View>
-            <View style={styles.icon}>
-                <Image source={icon} />
+            <LinearGradient
+                colors={bgGradient}
+                style={[styles.container, styles.shadowProp]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+            >
+                <View style={styles.place}>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26 }}>
+                        {card.name}
+                    </Text>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                        {card.date},
+                    </Text>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                        {card.day}
+                    </Text>
+                    <Text style={{ marginTop: 12, color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
+                        {card.time}
+                    </Text>
+                </View>
+                <View style={styles.icon}>
+                    <Image source={icon} />
 
-            </View>
-            <View style={styles.temp}>
-                <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
-                    {card.temp}°
-                </Text>
-            </View>
-        </LinearGradient>
+                </View>
+                <View style={styles.temp}>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
+                        {`${card.temp}°`}
+                    </Text>
+                </View>
+            </LinearGradient>
+        </Pressable>
     )
 }
 
