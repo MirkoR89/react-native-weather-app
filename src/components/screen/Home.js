@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../redux/thunks/fetchData";
+import WeatherCard from "../layout/WeatherCard";
 
 const Home = () => {
 
@@ -15,7 +16,7 @@ const Home = () => {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hello, world!</Text>
+            <WeatherCard />
         </View>
     )
 }
