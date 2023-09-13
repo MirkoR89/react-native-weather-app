@@ -1,10 +1,12 @@
 
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { useSelector } from "react-redux";
 
 const WeatherDetails = ({ route, navigation }) => {
 
     const { card, bgGradient, icon } = route.params;
+    const { details } = useSelector(state => state.data);
 
     return (
         <LinearGradient

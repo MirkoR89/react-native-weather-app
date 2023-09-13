@@ -11,12 +11,28 @@ export const fetchData = createAsyncThunk('api/fetchData', async (city) => {
 
         return {
             name: response.data.name,
+            coord: response.data.coord,
             temp: kelvinToCelsius(response.data.main.temp).toString(),
             day: getDateTime(response.data.sys.sunrise, response.data.timezone).day,
             date: getDateTime(response.data.sys.sunrise, response.data.timezone).date,
             time: getDateTime(response.data.sys.sunrise, response.data.timezone).time,
             weather: response.data.weather[0]
         };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+});
+
+export const fetchDetails = createAsyncThunk('api/fetchDeta', async (coord) => {
+    const apiKey = API_KEY
+
+    try {
+        const lat = coord.lat
+        const lon = coord.lon
+        const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+
+        return response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;

@@ -1,7 +1,11 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { useDispatch } from "react-redux";
+import { fetchDetails } from "../../redux/thunks/fetchData";
 
 const WeatherCard = ({ card, navigation }) => {
+
+    const dispatch = useDispatch()
 
     let icon
     let bgGradient
@@ -25,13 +29,17 @@ const WeatherCard = ({ card, navigation }) => {
     } else {
         icon = require('../../assets/icons/Cloudy.png')
         bgGradient = ['#464C64', '#99A9B9']
+    }
 
+    const handleDetails = () => {
+        dispatch((fetchDetails(card.coord)))
+        navigation.navigate('WeatherDetails', { card, bgGradient, icon })
     }
 
     return (
         <Pressable
             title={card.name}
-            onPress={() => navigation.navigate('WeatherDetails', { card, bgGradient, icon })}
+            onPress={handleDetails}
         >
             <LinearGradient
                 colors={bgGradient}
