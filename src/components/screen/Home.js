@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../redux/thunks/fetchData";
 import WeatherCard from "../layout/WeatherCard";
@@ -9,7 +9,7 @@ const Home = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchData('Turin'))
+        dispatch(fetchData('Paris'))
         dispatch(fetchData('London'))
         dispatch(fetchData('Rome'))
     }, [])
@@ -19,23 +19,25 @@ const Home = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View>
-                <Text style={styles.text}>
+                <Text style={{...styles.text, width: 215, }}>
                     Good Morning!
-                </Text>
-                <Text style={styles.text}>
                     Mario
                 </Text>
             </View>
             <View style={styles.plus}>
             <Image source={require('../../assets/icons/Plus.png')} />
-                <Text style={{...styles.text, fontSize: 20}}>
+                <Text style={{...styles.text, fontSize: 20, marginLeft: 10 }}>
                     Aggiungi Città
                 </Text>
             </View>
             {
-                data.map((card, i) =>
-                    <WeatherCard key={i} card={card} />
-                    )
+                data &&
+            <FlatList
+            data={data}
+            renderItem={({ item }) => <WeatherCard card={item} />}
+            keyExtractor={(item) => item.name}
+            >
+            </FlatList>
             }
         </View>
     )
@@ -51,7 +53,8 @@ const styles = StyleSheet.create({
     plus: {
         flexDirection:"row",
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
+        marginVertical: 25
     }
 })
 
