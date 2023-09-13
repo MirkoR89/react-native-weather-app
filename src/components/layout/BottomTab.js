@@ -1,7 +1,6 @@
-import { Image, StyleSheet, TouchableNativeFeedback, View, Pressable } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 const BottomTab = ({ state, navigation, active, setActive }) => {
-
 
     return (
         <View style={[styles.container, styles.shadowProp]}>
@@ -25,19 +24,19 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
 
                     return (
                         <Pressable
-                        key={route.key}
-                        onPress={onPress}
-                        style={{
-                            ...styles.button,
-                            borderBottomWidth: route.name === active ? 2 : 0,
-                            borderBottomColor: route.name === active ? '#01175F' : '#FFF'
-                        }}>
-                            <View style={styles.icon }>
+                            key={route.key}
+                            onPress={onPress}
+                            style={{
+                                ...styles.button,
+                                borderBottomWidth: route.name === active ? 2 : 0,
+                                borderBottomColor: route.name === active ? '#01175F' : '#FFF'
+                            }}>
+                            <View style={styles.icon}>
                                 {route.name === 'Home' && <Image source={require('../../assets/icons/Home.png')} />}
                                 {route.name === 'Search' && <Image source={require('../../assets/icons/Search.png')} />}
                                 {route.name === 'Location' && <Image source={require('../../assets/icons/Location.png')} />}
                             </View>
-                            </Pressable>
+                        </Pressable>
 
 
                     );
@@ -71,10 +70,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     shadowProp: {
-        shadowOffset: {width: -2, height: 4},
+        shadowOffset: { width: -2, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
-      },
+    },
 })
 
 export default BottomTab;

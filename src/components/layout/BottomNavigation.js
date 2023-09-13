@@ -20,7 +20,6 @@ const BottomNavigation = () => {
                 <Tab.Screen name="Location" component={Location} />
             </Tab.Navigator>
         </SafeAreaView>
-
     );
 }
 

@@ -12,7 +12,7 @@ export const fetchData = createAsyncThunk('api/fetchData', async (city) => {
         return {
             name: response.data.name,
             temp: kelvinToCelsius(response.data.main.temp).toString(),
-            day:getDateTime(response.data.sys.sunrise, response.data.timezone).day,
+            day: getDateTime(response.data.sys.sunrise, response.data.timezone).day,
             date: getDateTime(response.data.sys.sunrise, response.data.timezone).date,
             time: getDateTime(response.data.sys.sunrise, response.data.timezone).time,
             weather: response.data.weather[0]
