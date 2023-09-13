@@ -1,36 +1,56 @@
 import { View, StyleSheet, Text, Image } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 
+const WeatherCard = ({card}) => {
 
-const WeatherCard = () => {
+    let icon
+    let bgGradient
+
+    if (card.weather.icon === '09n' ||
+    card.weather.icon === '10n' ||
+    card.weather.icon === '11n' ||
+    card.weather.icon === '13n' ||
+    card.weather.icon === '50n') {
+        icon = require('../../assets/icons/ModRainSwrsDay.png')
+        bgGradient =['#011354', '#5B9FE3' ]
+    } else if (card.weather.icon === '03n' ||
+    card.weather.icon === '04n') {
+        icon = require('../../assets/icons/Cloudy.png')
+        bgGradient =['#5374E7', '#77B9F5' ]
+    } else {
+        icon = require('../../assets/icons/Cloudy.png')
+        bgGradient =['#464C64', '#99A9B9' ]
+
+    }
+
     return (
         <LinearGradient
-            colors={['#011354', '#5B9FE3' ]}
+            colors={bgGradient}
             style={[styles.container, styles.shadowProp]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
         >
             <View style={styles.place}>
             <Text style={{color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26}}>
-                London
+                {card.name}
             </Text>
-            <Text style={{width: 84, color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15}}>
-                Friday 18,
-                Septeber
+            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15}}>
+            {card.date},
+            </Text>
+            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15}}>
+            {card.day}
             </Text>
             <Text style={{marginTop: 12, color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12}}>
-                2:38 p.m.
+            {card.time}
             </Text>
             </View>
             <View style={styles.icon}>
-            <Image source={require('../../assets/icons/ModRainSwrsDay.png')} />
-            {/* {route.name === 'Home' && <Image source={require('../../assets/icons/Home.png')} />}
-            {route.name === 'Search' && <Image source={require('../../assets/icons/Search.png')} />}
-            {route.name === 'Location' && <Image source={require('../../assets/icons/Location.png')} />} */}
+            <Image source={icon} />
+            
             </View>
             <View style={styles.temp}>
             <Text style={{color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50}}>
-                18°
+                {card.temp}°
             </Text>
             </View>
         </LinearGradient>

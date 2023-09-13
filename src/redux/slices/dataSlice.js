@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../thunks/fetchData";
 
 const initialState = {
-    data: {},
+    data: [],
     loading: false,
     error: '',
 }
@@ -19,7 +19,7 @@ const dataSlice = createSlice({
             })
             .addCase(fetchData.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload;
+                state.data.push(action.payload);
             })
             .addCase(fetchData.rejected, (state, action) => {
                 state.loading = false;
