@@ -3,6 +3,7 @@ import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from "
 import LinearGradient from "react-native-linear-gradient";
 import { useSelector } from "react-redux";
 import NextDay from "../layout/NextDay";
+import TimeLine from "../layout/TimeLine";
 
 const WeatherDetails = ({ route, navigation }) => {
 
@@ -32,9 +33,10 @@ const WeatherDetails = ({ route, navigation }) => {
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20 }}>{card.weather.main}</Text>
                 <View style={styles.tempArea}>
                     <Image source={icon} />
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 110, marginTop: 15, marginLeft: 42 }}>{`${card.temp}°`}</Text>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 110, marginLeft: 42 }}>{`${card.temp}°`}</Text>
                 </View>
             </View>
+            <TimeLine detailsHour={details.hourly} timezone={details.timezone_offset} />
             <ScrollView>
                 {
                     details.daily &&
@@ -54,7 +56,8 @@ const WeatherDetails = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        // flex: 1,
+        // justifyContent: "space-between",
         height: '100%',
         padding: 20
     },

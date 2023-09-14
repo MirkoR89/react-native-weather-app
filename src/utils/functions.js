@@ -32,6 +32,26 @@ export const getDateTime = (sunrise, timezone) => {
 	return { day: date.split(', ')[0], date: date.split(', ')[1], time }
 }
 
+export const getHours = (time, timezone) => {
+	const date = new Date(time * 1000 - (timezone * 1000))
+	let hours = date.getHours();
+	const minutes = date.getMinutes();
+	let period = "a.m.";
+
+	if (hours >= 12) {
+		period = "p.m.";
+		if (hours > 12) {
+			hours -= 12;
+		}
+	}
+
+	if (hours === 0) {
+		hours = 12;
+	}
+
+	return `${hours}:${minutes < 10 ? "0" : ""}${minutes} ${period}`;
+}
+
 export const getBgAndIcon = (cardIcon) => {
 	let icon
 	let bgGradient

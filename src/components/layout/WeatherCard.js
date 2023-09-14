@@ -43,7 +43,6 @@ const WeatherCard = ({ card, navigation }) => {
                 </View>
                 <View style={styles.icon}>
                     <Image source={icon} />
-
                 </View>
                 <View style={styles.temp}>
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>

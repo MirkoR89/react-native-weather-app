@@ -9,9 +9,6 @@ const Home = ({ navigation }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchData('Paris'))
-        dispatch(fetchData('Tokio'))
-        dispatch(fetchData('London'))
         dispatch(fetchData('Rome'))
         dispatch(fetchData('New York'))
         dispatch(fetchData('Madrid'))
