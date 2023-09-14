@@ -2,34 +2,14 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useDispatch } from "react-redux";
 import { fetchDetails } from "../../redux/thunks/fetchData";
+import { getBgAndIcon } from "../../utils/functions";
 
 const WeatherCard = ({ card, navigation }) => {
 
     const dispatch = useDispatch()
+    const bgGradient = getBgAndIcon(card.weather.icon).bgGradient
+    const icon = getBgAndIcon(card.weather.icon).icon
 
-    let icon
-    let bgGradient
-
-    if (card.weather.icon === '01n') {
-        icon = require('../../assets/icons/Sunny.png')
-        bgGradient = ['#5374E7', '#77B9F5']
-    } else if (card.weather.icon === '03n' || card.weather.icon === '02n') {
-        icon = require('../../assets/icons/PartlyCloudyDay.png')
-        bgGradient = ['#5374E7', '#77B9F5']
-    } else if (card.weather.icon === '03n' ||
-        card.weather.icon === '04n') {
-        icon = require('../../assets/icons/Cloudy.png')
-        bgGradient = ['#464C64', '#99A9B9']
-    } else if (card.weather.icon === '09n' || card.weather.icon === '11n') {
-        icon = require('../../assets/icons/OccLightRain.png')
-        bgGradient = ['#464C64', '#99A9B9']
-    } else if (card.weather.icon === '10n') {
-        icon = require('../../assets/icons/ModRainSwrsDay.png')
-        bgGradient = ['#011354', '#5B9FE3']
-    } else {
-        icon = require('../../assets/icons/Cloudy.png')
-        bgGradient = ['#464C64', '#99A9B9']
-    }
 
     const handleDetails = () => {
         dispatch((fetchDetails(card.coord)))

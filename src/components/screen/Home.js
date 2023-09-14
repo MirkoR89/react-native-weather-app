@@ -20,18 +20,20 @@ const Home = ({ navigation }) => {
     const { data } = useSelector(state => state.data);
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <View>
-                <Text style={{ ...styles.text, width: 215, }}>
-                    Good Morning!
-                    Mario
-                </Text>
-            </View>
-            <View style={styles.plus}>
-                <Image source={require('../../assets/icons/Plus.png')} />
-                <Text style={{ ...styles.text, fontSize: 20, marginLeft: 10 }}>
-                    Aggiungi Città
-                </Text>
+        <View style={styles.container}>
+            <View style={styles.content}>
+                <View>
+                    <Text style={{ ...styles.text, width: 215, }}>
+                        Good Morning!
+                        Mario
+                    </Text>
+                </View>
+                <View style={styles.plus}>
+                    <Image source={require('../../assets/icons/Plus.png')} />
+                    <Text style={{ ...styles.text, fontSize: 20, marginLeft: 10, marginTop: 5 }}>
+                        Aggiungi Città
+                    </Text>
+                </View>
             </View>
             {
                 data &&
@@ -47,6 +49,16 @@ const Home = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    content: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+        // height: '25%',
+    },
     text: {
         color: '#01175F',
         fontFamily: 'Poppins-SemiBold',
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 25
+        marginTop: 25
     }
 })
 

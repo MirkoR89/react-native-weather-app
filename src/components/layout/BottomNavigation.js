@@ -14,8 +14,10 @@ const BottomNavigation = () => {
 
     return (
         <SafeAreaView style={{ marginTop: 0, marginBottom: 0, flex: 1, width: '100%', height: '100%', backgroundColor: '#F1F1F1' }}>
-            <StatusBar barStyle="dark-content" backgroundColor={'#F1F1F1'} translucent={true} />
-            <Tab.Navigator tabBar={props => <BottomTab {...props} active={active} setActive={setActive} />} screenOptions={{ headerShown: false }} >
+            <StatusBar barStyle="dark-content" />
+            <Tab.Navigator
+                tabBar={props => <BottomTab {...props} active={active} setActive={setActive} />}
+                screenOptions={{ headerShown: false }} >
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Location" component={Location} />
