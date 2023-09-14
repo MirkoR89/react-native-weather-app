@@ -10,7 +10,7 @@ const NextDay = ({ item, timezone }) => {
             <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 22, marginTop: 27.4 }}>{getDateTime(item.sunrise, timezone).day}</Text>
             <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 36 }}>{`${kelvinToCelsius(item.temp.day)}°`}</Text>
             <View style={styles.imageContainer}>
-                <Image style={{ marginBottom: 30 }} source={icon} />
+                <Image style={{ marginBottom: 40 }} source={icon} />
             </View>
         </View>
     )

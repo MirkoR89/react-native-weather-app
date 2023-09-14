@@ -20,8 +20,8 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.content}>
                 <View>
-                    <Text style={{ ...styles.text, width: 215, }}>
-                        Good Morning!
+                    <Text style={{ ...styles.text, width: 230, }}>
+                        Good morning!
                         Mario
                     </Text>
                 </View>
@@ -66,7 +66,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 25
+        marginTop: 25,
+        marginBottom: 55
+
     }
 })
 

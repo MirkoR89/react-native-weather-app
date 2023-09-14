@@ -28,16 +28,16 @@ const WeatherCard = ({ card, navigation }) => {
                 end={{ x: 1, y: 1 }}
             >
                 <View style={styles.place}>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26 }}>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26, lineHeight: 39 }}>
                         {card.name}
                     </Text>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15, marginBottom: -7 }}>
                         {card.date},
                     </Text>
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
                         {card.day}
                     </Text>
-                    <Text style={{ marginTop: 12, color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
+                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
                         {card.time}
                     </Text>
                 </View>
@@ -58,18 +58,22 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         borderRadius: 25,
         backgroundColor: '#FFF',
         width: 374,
         height: 140,
-        margin: 20,
+        margin: 10,
         padding: 20,
         elevation: 10,
         shadowColor: 'rgba(0,0,0,0.17)',
     },
+    temp: {
+        justifyContent: 'center',
+
+    },
     shadowProp: {
-        shadowOffset: { width: -2, height: 4 },
+        shadowOffset: { width: 50, height: 10 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
     }

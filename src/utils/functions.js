@@ -49,7 +49,7 @@ export const getHours = (time, timezone) => {
 		hours = 12;
 	}
 
-	return `${hours}:${minutes < 10 ? "0" : ""}${minutes} ${period}`;
+	return `${hours} ${period}`;
 }
 
 export const getBgAndIcon = (cardIcon) => {

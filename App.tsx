@@ -6,10 +6,17 @@ import store from './src/redux/store';
 
 
 const App = () => {
+
+	const theme = {
+		colors: {
+			background: "transparent",
+		},
+	};
+
 	return (
 		<Provider store={store}>
 			<SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-				<NavigationContainer>
+				<NavigationContainer >
 					<BottomNavigation />
 				</NavigationContainer>
 			</SafeAreaView>

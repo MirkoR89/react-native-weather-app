@@ -1,5 +1,5 @@
 
-import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useSelector } from "react-redux";
 import NextDay from "../layout/NextDay";
@@ -30,14 +30,14 @@ const WeatherDetails = ({ route, navigation }) => {
                     <Image source={require('../../assets/icons/PlusWhite.png')} />
                 </View>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 20 }}>{`${card.day}, ${card.date}`}</Text>
-                <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20 }}>{card.weather.main}</Text>
+                <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20, marginTop: 10 }}>{card.weather.main}</Text>
                 <View style={styles.tempArea}>
-                    <Image source={icon} />
+                    <Image style={{ marginBottom: 20 }} source={icon} />
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 110, marginLeft: 42 }}>{`${card.temp}°`}</Text>
                 </View>
             </View>
             <TimeLine detailsHour={details.hourly} timezone={details.timezone_offset} />
-            <ScrollView>
+            <View style={{ marginLeft: 20 }}>
                 {
                     details.daily &&
                     <FlatList
@@ -49,23 +49,20 @@ const WeatherDetails = ({ route, navigation }) => {
                     >
                     </FlatList>
                 }
-            </ScrollView>
+            </View>
         </LinearGradient>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // justifyContent: "space-between",
         height: '100%',
-        padding: 20
     },
     content: {
         alignItems: 'center',
         width: '100%',
-        // height: '60%',
-        // marginTop: 45
+        paddingTop: 20,
+        paddingHorizontal: 20,
     },
     textArea: {
         width: '100%',

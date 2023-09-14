@@ -17,7 +17,16 @@ const BottomNavigation = () => {
             <StatusBar barStyle="dark-content" />
             <Tab.Navigator
                 tabBar={props => <BottomTab {...props} active={active} setActive={setActive} />}
-                screenOptions={{ headerShown: false }} >
+                screenOptions={{
+                    headerShown: false,
+                    tabBarStyle: {
+                        position: "absolute",
+                        left: 0,
+                        bottom: 0,
+                        elevation: 0,
+                        borderTopWidth: 0,
+                    },
+                }} >
                 <Tab.Screen name="Home" component={Home} />
                 <Tab.Screen name="Search" component={Search} />
                 <Tab.Screen name="Location" component={Location} />
