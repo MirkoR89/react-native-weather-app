@@ -15,15 +15,15 @@ export const getDateTime = (sunrise, timezone) => {
 	const dateTime = new Date((sunrise + timezone) * 1000)
 
 	const options = {
-		weekday: 'long', // Full weekday name (e.g., "Friday")
-		day: 'numeric', // Day of the month (e.g., "18")
-		month: 'long', // Full month name (e.g., "September")
+		weekday: 'long',
+		day: 'numeric',
+		month: 'long',
 	};
 
 	const timeOptions = {
-		hour: 'numeric', // Hours (e.g., "2")
-		minute: 'numeric', // Minutes (e.g., "38")
-		hour12: true, // Use 12-hour clock format (e.g., "a.m." or "p.m.")
+		hour: 'numeric',
+		minute: 'numeric',
+		hour12: true,
 	};
 
 	const date = dateTime.toLocaleDateString('en-US', options);
@@ -93,4 +93,8 @@ export const getBgAndIcon = (cardIcon) => {
 			break;
 	}
 	return { icon, bgGradient }
+}
+
+export const truncate = (string, n, noDots) => {
+	return string?.length > n ? string.substring(0, n) + (!noDots ? '..' : '') : string
 }

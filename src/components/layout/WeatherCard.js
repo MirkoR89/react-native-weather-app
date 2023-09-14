@@ -1,8 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import { Shadow } from 'react-native-shadow-2';
 import { useDispatch } from "react-redux";
 import { fetchDetails } from "../../redux/thunks/fetchData";
-import { getBgAndIcon } from "../../utils/functions";
+import { getBgAndIcon, truncate } from "../../utils/functions";
 
 const WeatherCard = ({ card, navigation }) => {
 
@@ -21,35 +22,42 @@ const WeatherCard = ({ card, navigation }) => {
             title={card.name}
             onPress={handleDetails}
         >
-            <LinearGradient
-                colors={bgGradient}
-                style={[styles.container, styles.shadowProp]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
+            <Shadow
+                distance={10}
+                startColor="rgba(0, 0, 0, 0.17)"
+                distanceInfluence={0.5}
+                offset={[25, 20]}
             >
-                <View style={styles.place}>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26, lineHeight: 39 }}>
-                        {card.name}
-                    </Text>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15, marginBottom: -7 }}>
-                        {card.date},
-                    </Text>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
-                        {card.day}
-                    </Text>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
-                        {card.time}
-                    </Text>
-                </View>
-                <View style={styles.icon}>
-                    <Image source={icon} />
-                </View>
-                <View style={styles.temp}>
-                    <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
-                        {`${card.temp}°`}
-                    </Text>
-                </View>
-            </LinearGradient>
+                <LinearGradient
+                    colors={bgGradient}
+                    style={styles.container}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                >
+                    <View style={styles.place}>
+                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26, lineHeight: 39 }}>
+                            {truncate(card.name, 8)}
+                        </Text>
+                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15, marginBottom: -7 }}>
+                            {card.date},
+                        </Text>
+                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                            {card.day}
+                        </Text>
+                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
+                            {`${card.time.split(' ')[0]} ${card.time.split(' ')[0] === 'AM' ? 'a.m.' : 'p.m.'}`}
+                        </Text>
+                    </View>
+                    <View style={styles.icon}>
+                        <Image source={icon} />
+                    </View>
+                    <View style={styles.temp}>
+                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
+                            {`${card.temp}°`}
+                        </Text>
+                    </View>
+                </LinearGradient>
+            </Shadow>
         </Pressable>
     )
 }
@@ -60,23 +68,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         borderRadius: 25,
-        backgroundColor: '#FFF',
         width: 374,
         height: 140,
-        margin: 10,
-        padding: 20,
-        elevation: 10,
-        shadowColor: 'rgba(0,0,0,0.17)',
+        marginVertical: 10,
+        margin: 20,
+    },
+    place: {
+        paddingLeft: 20,
     },
     temp: {
-        justifyContent: 'center',
-
+        marginTop: 10,
+        paddingRight: 20,
     },
-    shadowProp: {
-        shadowOffset: { width: 50, height: 10 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-    }
 })
 
 export default WeatherCard
