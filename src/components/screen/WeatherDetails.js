@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingTop: 20,
         paddingHorizontal: 20,
+        marginTop: 40,
     },
     textArea: {
         width: '100%',

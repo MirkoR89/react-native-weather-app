@@ -47,6 +47,7 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         width: 374,
         height: 78,
         margin: 20,
-        elevation: 10,
+        elevation: 50,
         shadowColor: 'rgba(0,0,0,0.17)',
     },
     button: {
