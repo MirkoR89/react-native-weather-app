@@ -1,9 +1,11 @@
 
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import Icon from 'react-native-vector-icons/AntDesign';
 import { useSelector } from "react-redux";
 import NextDay from "../layout/NextDay";
 import TimeLine from "../layout/TimeLine";
+
 
 const WeatherDetails = ({ route, navigation }) => {
 
@@ -24,10 +26,10 @@ const WeatherDetails = ({ route, navigation }) => {
             <View style={styles.content}>
                 <View style={styles.textArea}>
                     <Pressable onPress={handleBack} >
-                        <Image source={require('../../assets/icons/ArrowLeft.png')} />
+                        <Icon name="arrowleft" size={30} color="#FFF" />
                     </Pressable>
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 32 }}>{card.name}</Text>
-                    <Image source={require('../../assets/icons/PlusWhite.png')} />
+                    <Icon name="pluscircleo" size={30} color="#FFF" />
                 </View>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 20 }}>{`${card.day}, ${card.date}`}</Text>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20, marginTop: 10 }}>{card.weather.main}</Text>

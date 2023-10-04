@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../redux/thunks/fetchData";
 import WeatherCard from "../layout/WeatherCard";
+
 
 const Home = ({ navigation }) => {
 
@@ -26,7 +28,7 @@ const Home = ({ navigation }) => {
                     </Text>
                 </View>
                 <View style={styles.plus}>
-                    <Image source={require('../../assets/icons/Plus.png')} />
+                    <Icon name="pluscircleo" size={30} color="#01175F" />
                     <Text style={{ ...styles.text, fontSize: 20, marginLeft: 10, marginTop: 5 }}>
                         Aggiungi Città
                     </Text>

@@ -1,7 +1,27 @@
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const BottomTab = ({ state, navigation, active, setActive }) => {
+
+    const icons = [
+        {
+            id: 0,
+            route: 'Home',
+            name: 'home'
+        },
+        {
+            id: 1,
+            route: 'Search',
+            name: 'search1'
+        },
+        {
+            id: 2,
+            route: 'Location',
+            name: 'enviromento'
+        }
+    ]
+
     return (
         <Shadow
             distance={10}
@@ -30,22 +50,22 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
                             }
                         }
                         return (
-                            <Pressable
+                            <TouchableNativeFeedback
+                                background={TouchableNativeFeedback.Ripple('#d1d5db', true, 65)}
                                 key={route.key}
                                 onPress={onPress}
-                                style={{
+                            >
+                                <View style={{
                                     ...styles.button,
-                                    borderBottomWidth: route.name === active ? 2 : 0,
+                                    borderBottomWidth: route.name === active ? 3 : 0,
                                     borderBottomColor: route.name === active ? '#01175F' : '#FFF'
                                 }}>
-                                <View style={styles.icon}>
-                                    <Image source={
-                                        route.name === 'Home' ? require('../../assets/icons/Home.png') :
-                                            route.name === 'Search' ? require('../../assets/icons/Search.png') :
-                                                require('../../assets/icons/Location.png')
-                                    } />
+                                    <View style={styles.icon}>
+                                        <Icon name={icons.find(icon => icon.route === route.name).name} size={30} color={route.name === active ? '#01175F' : '#464C64'} />
+                                    </View>
                                 </View>
-                            </Pressable>
+
+                            </TouchableNativeFeedback>
                         );
                     })}
             </View>

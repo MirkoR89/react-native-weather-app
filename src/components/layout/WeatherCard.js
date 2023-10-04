@@ -12,8 +12,8 @@ const WeatherCard = ({ card, navigation }) => {
     const icon = getBgAndIcon(card.weather.icon).icon
 
 
-    const handleDetails = () => {
-        dispatch((fetchDetails(card.coord)))
+    const handleDetails = async () => {
+        await dispatch((fetchDetails(card.coord)))
         navigation.navigate('WeatherDetails', { card, bgGradient, icon })
     }
 
