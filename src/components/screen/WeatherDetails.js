@@ -7,12 +7,13 @@ import NextDay from "../layout/NextDay";
 import TimeLine from "../layout/TimeLine";
 
 
-const WeatherDetails = ({ route, navigation }) => {
+const WeatherDetails = ({ route, navigation, setActive }) => {
 
     const { card, bgGradient, icon } = route.params;
     const { details } = useSelector(state => state.data);
 
     const handleBack = () => {
+        setActive('Home')
         navigation.goBack()
     }
 

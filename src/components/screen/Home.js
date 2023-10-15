@@ -1,22 +1,17 @@
-import { useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../redux/thunks/fetchData";
+import { useSelector } from "react-redux";
 import WeatherCard from "../layout/WeatherCard";
 
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, setActive }) => {
 
-    const dispatch = useDispatch()
+    const { data } = useSelector(state => state.data)
 
-    useEffect(() => {
-        dispatch(fetchData('Rome'))
-        dispatch(fetchData('New York'))
-        dispatch(fetchData('Madrid'))
-    }, [])
-
-    const { data } = useSelector(state => state.data);
+    const handleNavigate = () => {
+        setActive('Search')
+        navigation.navigate('Search')
+    }
 
     return (
         <View style={styles.container}>
@@ -24,15 +19,20 @@ const Home = ({ navigation }) => {
                 <View>
                     <Text style={{ ...styles.text, width: 230, }}>
                         Good morning!
-                        Mario
+                        Mirko
                     </Text>
                 </View>
-                <View style={styles.plus}>
-                    <Icon name="pluscircleo" size={30} color="#01175F" />
-                    <Text style={{ ...styles.text, fontSize: 20, marginLeft: 10, marginTop: 5 }}>
-                        Aggiungi Città
-                    </Text>
-                </View>
+                <TouchableNativeFeedback
+                    background={TouchableNativeFeedback.Ripple('#d1d5db')}
+                    onPress={handleNavigate}
+                >
+                    <View style={styles.plus}>
+                        <Icon name="pluscircleo" size={30} color="#01175F" />
+                        <Text style={{ ...styles.text, fontSize: 20, marginLeft: 10, marginTop: 5 }}>
+                            Add city
+                        </Text>
+                    </View>
+                </TouchableNativeFeedback>
             </View>
             {
                 data &&

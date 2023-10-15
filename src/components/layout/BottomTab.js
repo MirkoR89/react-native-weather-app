@@ -34,7 +34,8 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
                     styles.slider,
                     {
                         transform: [{ translateX: translateValue }],
-                        width: tabWidth,
+                        width: tabWidth - 40,
+                        marginLeft: 20
                     },
                 ]}
             />

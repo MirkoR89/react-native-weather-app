@@ -3,9 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { getDateTime, kelvinToCelsius } from '../../utils/functions';
 
-export const fetchData = createAsyncThunk('api/fetchData', async (city) => {
-    const apiKey = API_KEY
+const apiKey = API_KEY
 
+export const fetchDataWeather = createAsyncThunk('api/fetchData', async (city) => {
     try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
 
@@ -24,15 +24,30 @@ export const fetchData = createAsyncThunk('api/fetchData', async (city) => {
     }
 });
 
-export const fetchDetails = createAsyncThunk('api/fetchDeta', async (coord) => {
-    const apiKey = API_KEY
-
+export const fetchDetails = createAsyncThunk('api/fetchDetails', async (coord) => {
     try {
         const lat = coord.lat
         const lon = coord.lon
         const response = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`);
 
         return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+});
+
+export const fetchCitiesList = createAsyncThunk('api/fetchCitiesList', async (cityName) => {
+    try {
+        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=8&appid=${apiKey}`);
+
+        return response.data.map(item => (
+            {
+                name: item.name,
+                country: item.country,
+                state: item.state,
+                coord: { lat: item.lat, lon: item.lon }
+            }))
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;

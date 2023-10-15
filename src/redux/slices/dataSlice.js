@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchData, fetchDetails } from "../thunks/fetchData";
+import { fetchCitiesList, fetchDataWeather, fetchDetails } from "../thunks/fetchData";
 
 const initialState = {
     data: [],
+    citiesList: [],
     details: {},
     loading: false,
     error: '',
@@ -11,18 +12,25 @@ const initialState = {
 const dataSlice = createSlice({
     name: 'data',
     initialState,
-    reducers: {},
+    reducers: {
+        clearData(state, action) {
+            state.data = state.data.filter(item => item.name !== action.payload)
+        },
+        clearSearchBar(state) {
+            state.citiesList = []
+        },
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchData.pending, (state) => {
+            .addCase(fetchDataWeather.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchData.fulfilled, (state, action) => {
+            .addCase(fetchDataWeather.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data.push(action.payload);
             })
-            .addCase(fetchData.rejected, (state, action) => {
+            .addCase(fetchDataWeather.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
@@ -38,7 +46,24 @@ const dataSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
+            .addCase(fetchCitiesList.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchCitiesList.fulfilled, (state, action) => {
+                state.loading = false;
+                state.citiesList = action.payload
+            })
+            .addCase(fetchCitiesList.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
     },
 });
 
-export default dataSlice.reducer;
+// Extract the action creators object and the reducer
+const { actions, reducer } = dataSlice
+// Extract and export each action creator by name
+export const { clearData, clearSearchBar } = actions
+// Export the reducer, either as a default or named export
+export default reducer
