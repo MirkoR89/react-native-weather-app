@@ -2,6 +2,7 @@
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/AntDesign';
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from "react-redux";
 import { clearSearchBar, removeCard } from "../../redux/slices/dataSlice";
 import { fetchDataWeather } from "../../redux/thunks/fetchData";
@@ -56,7 +57,7 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
                                 <Icon name="pluscircleo" size={30} color="#FFF" />
                             </Pressable> :
                             <Pressable onPress={handleRemove} >
-                                <Icon name="delete" size={30} color="#FFF" />
+                                <MIcon name="delete" size={30} color="#FFF" />
                             </Pressable>
                     }
                 </View>
