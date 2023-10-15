@@ -15,10 +15,7 @@ const Search = ({ route, navigation }) => {
     const { data } = useSelector(state => state.data);
     const [value, setValue] = useState('')
     const inputRef = useRef(null);
-    const { addCity } = route.params;
-
-    console.log(addCity);
-
+    const _addCity = route.params?.addCity;
     const handleSearch = text => {
         setValue(text)
         if (text.length === 0) return dispatch(clearSearchBar())
@@ -35,11 +32,11 @@ const Search = ({ route, navigation }) => {
     }, [navigation])
 
     useEffect(() => {
-        if (inputRef.current && addCity) {
+        if (inputRef.current && _addCity) {
             inputRef.current.focus()
             route.params = false
         }
-    }, [addCity])
+    }, [_addCity])
 
 
     return (

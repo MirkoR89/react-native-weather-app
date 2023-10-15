@@ -3,7 +3,7 @@ import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native
 import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/AntDesign';
 import { useDispatch, useSelector } from "react-redux";
-import { clearSearchBar } from "../../redux/slices/dataSlice";
+import { clearSearchBar, removeCard } from "../../redux/slices/dataSlice";
 import { fetchDataWeather } from "../../redux/thunks/fetchData";
 import NextDay from "../layout/NextDay";
 import TimeLine from "../layout/TimeLine";
@@ -30,6 +30,13 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
         navigation.navigate('Home')
     }
 
+    const handleRemove = async () => {
+        await dispatch(removeCard(card.name))
+        dispatch(clearSearchBar())
+        setActive('Home')
+        navigation.navigate('Home')
+    }
+
     return (
         <LinearGradient
             colors={bgGradient}
@@ -48,7 +55,9 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
                             <Pressable onPress={handleAdd} >
                                 <Icon name="pluscircleo" size={30} color="#FFF" />
                             </Pressable> :
-                            <View style={{ width: 30, height: 30 }} />
+                            <Pressable onPress={handleRemove} >
+                                <Icon name="delete" size={30} color="#FFF" />
+                            </Pressable>
                     }
                 </View>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 20 }}>{`${card.day}, ${card.date}`}</Text>

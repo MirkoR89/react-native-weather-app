@@ -13,7 +13,7 @@ const dataSlice = createSlice({
     name: 'data',
     initialState,
     reducers: {
-        clearData(state, action) {
+        removeCard(state, action) {
             state.data = state.data.filter(item => item.name !== action.payload)
         },
         clearSearchBar(state) {
@@ -64,6 +64,6 @@ const dataSlice = createSlice({
 // Extract the action creators object and the reducer
 const { actions, reducer } = dataSlice
 // Extract and export each action creator by name
-export const { clearData, clearSearchBar } = actions
+export const { removeCard, clearSearchBar } = actions
 // Export the reducer, either as a default or named export
 export default reducer
