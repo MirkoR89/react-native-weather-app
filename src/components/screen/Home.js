@@ -10,7 +10,7 @@ const Home = ({ navigation, setActive }) => {
 
     const handleNavigate = () => {
         setActive('Search')
-        navigation.navigate('Search')
+        navigation.navigate('Search', { addCity: true })
     }
 
     return (

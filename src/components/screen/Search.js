@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,12 +8,16 @@ import { fetchCitiesList } from "../../redux/thunks/fetchData";
 import CityDetails from "../layout/CityDetails";
 
 
-const Search = ({ navigation }) => {
+const Search = ({ route, navigation }) => {
 
     const dispatch = useDispatch()
     const { citiesList } = useSelector(state => state.data);
     const { data } = useSelector(state => state.data);
     const [value, setValue] = useState('')
+    const inputRef = useRef(null);
+    const { addCity } = route.params;
+
+    console.log(addCity);
 
     const handleSearch = text => {
         setValue(text)
@@ -24,17 +28,24 @@ const Search = ({ navigation }) => {
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('blur', () => {
-            setValue('');
+            setValue('')
             dispatch(clearSearchBar())
         })
         return unsubscribe
     }, [navigation])
 
+    useEffect(() => {
+        if (inputRef.current && addCity) {
+            inputRef.current.focus()
+            route.params = false
+        }
+    }, [addCity])
 
 
     return (
         <View style={styles.container}>
             <TextInput
+                ref={inputRef}
                 placeholder="Search a city"
                 placeholderTextColor="#AAA"
                 onChangeText={text => handleSearch(text)}

@@ -10,7 +10,6 @@ const CityDetails = ({ item, i, lengthList }) => {
     const dispatch = useDispatch()
     const navigation = useNavigation()
 
-
     const hanldeAddCity = async () => {
         const _data = await dispatch((fetchDetails(item.coord)))
         const data = _data.payload
