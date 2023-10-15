@@ -35,7 +35,6 @@ const CityDetails = ({ item, i, lengthList }) => {
             onPress={hanldeAddCity}
         >
             <View
-
                 style={{
                     ...styles.container,
                     borderBottomWidth: i !== lengthList ? 1 : 0,
@@ -44,8 +43,8 @@ const CityDetails = ({ item, i, lengthList }) => {
                 }}
             >
                 <View>
-                    <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 16 }}> {item.name},</Text>
-                    <Text style={{ fontFamily: 'Poppins-Light', fontSize: 14 }}>{`${item.state || 'not available'} - ${item.country || 'not available'}`}</Text>
+                    <Text style={{ color: '#464C64', fontFamily: 'Poppins-SemiBold', fontSize: 16 }}> {item.name},</Text>
+                    <Text style={{ color: '#464C64', fontFamily: 'Poppins-Light', fontSize: 14 }}>{`${item.state || 'not available'} - ${item.country || 'not available'}`}</Text>
                 </View>
                 <Icon name="pluscircle" size={25} color="#01175F" />
             </View>

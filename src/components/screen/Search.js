@@ -1,4 +1,5 @@
 
+import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,34 +8,48 @@ import { fetchCitiesList } from "../../redux/thunks/fetchData";
 import CityDetails from "../layout/CityDetails";
 
 
-const Search = () => {
+const Search = ({ navigation }) => {
 
     const dispatch = useDispatch()
     const { citiesList } = useSelector(state => state.data);
     const { data } = useSelector(state => state.data);
+    const [value, setValue] = useState('')
 
     const handleSearch = text => {
+        setValue(text)
         if (text.length === 0) return dispatch(clearSearchBar())
         else if (text.length < 3) return
         return dispatch(fetchCitiesList(text))
     }
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('blur', () => {
+            setValue('');
+            dispatch(clearSearchBar())
+        })
+        return unsubscribe
+    }, [navigation])
+
 
 
     return (
         <View style={styles.container}>
             <TextInput
                 placeholder="Search a city"
+                placeholderTextColor="#AAA"
                 onChangeText={text => handleSearch(text)}
+                value={value}
                 style={{
-                    ...styles.input, borderBottomLeftRadius: citiesList.length ? 0 : 10,
+                    ...styles.input,
+                    borderBottomLeftRadius: citiesList.length ? 0 : 10,
                     borderBottomRightRadius: citiesList.length ? 0 : 10,
+                    fontFamily: value ? 'Poppins-Medium' : 'Poppins-Light',
                 }}
             />
             <View style={styles.icon}>
                 <Icon name="search1" size={25} color="#464C64" />
             </View>
             {
-                // citiesList.length &&
                 <FlatList
                     data={citiesList}
                     renderItem={({ item, index }) => <CityDetails item={item} i={index} lengthList={citiesList.length - 1} data={data} />}
@@ -53,6 +68,7 @@ const styles = StyleSheet.create({
         marginTop: 100
     },
     input: {
+        color: '#464C64',
         position: "relative",
         alignSelf: "stretch",
         marginHorizontal: 20,
@@ -61,7 +77,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        fontFamily: 'Poppins-Medium',
         fontSize: 16,
 
     },

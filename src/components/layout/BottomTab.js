@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Animated, Dimensions, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import { Shadow } from 'react-native-shadow-2';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -26,6 +26,15 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
             name: 'enviromento'
         }
     ]
+
+    useEffect(() => {
+        const index = state.index
+        Animated.spring(translateValue, {
+            toValue: index * tabWidth,
+            velocity: 10,
+            useNativeDriver: true,
+        }).start()
+    }, [state.index])
 
     return (
         <>
