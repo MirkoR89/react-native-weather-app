@@ -13,20 +13,20 @@ const CityDetails = ({ item, i, lengthList }) => {
 
     const hanldeAddCity = async () => {
         const _data = await dispatch((fetchDetails(item.coord)))
-        const data = _data.payload.current
+        const data = _data.payload
 
-        const bgGradient = getBgAndIcon(data.weather.icon).bgGradient
-        const icon = getBgAndIcon(data.weather.icon).icon
+        const bgGradient = getBgAndIcon(data.current.weather.icon).bgGradient
+        const icon = getBgAndIcon(data.current.weather.icon).icon
 
         const card = {
             name: item.name,
-            temp: kelvinToCelsius(data.temp).toString(),
-            day: getDateTime(data.sunrise, data.timezone_offset).day,
-            date: getDateTime(data.sunrise, data.timezone_offset).date,
-            weather: data.weather[0]
+            temp: kelvinToCelsius(data.current.temp).toString(),
+            day: getDateTime(data.current.sunrise, data.timezone_offset).day,
+            date: getDateTime(data.current.sunrise, data.timezone_offset).date,
+            weather: data.current.weather[0]
         }
 
-        navigation.navigate('WeatherDetails', { card, bgGradient, icon })
+        navigation.navigate('WeatherDetails', { card, bgGradient, icon, search: 'search' })
     }
 
     return (
@@ -43,7 +43,7 @@ const CityDetails = ({ item, i, lengthList }) => {
                     borderBottomRightRadius: i === lengthList ? 10 : 0,
                 }}
             >
-                <View >
+                <View>
                     <Text style={{ fontFamily: 'Poppins-SemiBold', fontSize: 16 }}> {item.name},</Text>
                     <Text style={{ fontFamily: 'Poppins-Light', fontSize: 14 }}>{`${item.state || 'not available'} - ${item.country || 'not available'}`}</Text>
                 </View>

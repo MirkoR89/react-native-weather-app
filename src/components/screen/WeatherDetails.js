@@ -2,19 +2,32 @@
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSearchBar } from "../../redux/slices/dataSlice";
+import { fetchDataWeather } from "../../redux/thunks/fetchData";
 import NextDay from "../layout/NextDay";
 import TimeLine from "../layout/TimeLine";
 
 
 const WeatherDetails = ({ route, navigation, setActive }) => {
 
-    const { card, bgGradient, icon } = route.params;
+    const { card, bgGradient, icon, search } = route.params;
     const { details } = useSelector(state => state.data);
+    const { data } = useSelector(state => state.data);
+
+    const dispatch = useDispatch()
 
     const handleBack = () => {
+        search && dispatch(clearSearchBar())
+        setActive(search ? 'Search' : 'Home')
+        navigation.navigate(search ? 'Search' : 'Home')
+    }
+
+    const handleAdd = async () => {
+        await dispatch(fetchDataWeather(card.name))
+        dispatch(clearSearchBar())
         setActive('Home')
-        navigation.goBack()
+        navigation.navigate('Home')
     }
 
     return (
@@ -30,7 +43,13 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
                         <Icon name="arrowleft" size={30} color="#FFF" />
                     </Pressable>
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 32 }}>{card.name}</Text>
-                    <Icon name="pluscircleo" size={30} color="#FFF" />
+                    {
+                        search && !data.some(item => item.name === card.name) ?
+                            <Pressable onPress={handleAdd} >
+                                <Icon name="pluscircleo" size={30} color="#FFF" />
+                            </Pressable> :
+                            <View style={{ width: 30, height: 30 }} />
+                    }
                 </View>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 20 }}>{`${card.day}, ${card.date}`}</Text>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20, marginTop: 10 }}>{card.weather.main}</Text>

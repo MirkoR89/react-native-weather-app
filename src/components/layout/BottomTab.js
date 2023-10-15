@@ -48,7 +48,6 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
                 <View style={{ ...styles.container, width: totalWidth }}>
                     {
                         state.routes.map((route, index) => {
-
                             if (route.name === 'WeatherDetails') return
 
                             const onPress = () => {
@@ -80,10 +79,9 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
 
                                     <View style={styles.button}>
                                         <View style={styles.icon}>
-                                            <Icon name={icons.find(icon => icon.route === route.name).name} size={30} color={route.name === active ? '#01175F' : '#464C64'} />
+                                            <Icon name={icons.find(icon => icon.route === route.name).name} size={route.name === active ? 35 : 30} color={route.name === active ? '#01175F' : '#464C64'} />
                                         </View>
                                     </View>
-
                                 </TouchableNativeFeedback>
                             );
                         })}
