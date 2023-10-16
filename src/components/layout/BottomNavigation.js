@@ -13,8 +13,7 @@ const BottomNavigation = () => {
 
     return (
         <Tab.Navigator
-            tabBar={props => <BottomTab {...props} active={active} setActive={setActive} />}
-            screenOptions={{ headerShown: false }} >
+            tabBar={props => <BottomTab {...props} active={active} setActive={setActive} />} screenOptions={{ headerShown: false }} >
             <Tab.Screen name="Home" children={props => <Home {...props} setActive={setActive} />} />
             <Tab.Screen name="Search" component={Search} />
             <Tab.Screen name="Location" component={Location} />

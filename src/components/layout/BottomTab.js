@@ -34,6 +34,10 @@ const BottomTab = ({ state, navigation, active, setActive }) => {
             velocity: 10,
             useNativeDriver: true,
         }).start()
+
+        if (state.index === 3) {
+            setActive('')
+        }
     }, [state.index])
 
     return (
