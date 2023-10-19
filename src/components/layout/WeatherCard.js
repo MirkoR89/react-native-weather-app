@@ -23,10 +23,9 @@ const WeatherCard = ({ card, navigation }) => {
             onPress={handleDetails}
         >
             <Shadow
-                distance={10}
+                distance={7}
                 startColor="rgba(0, 0, 0, 0.17)"
-                distanceInfluence={0.5}
-                offset={[25, 20]}
+                offset={[20, 20]}
             >
                 <LinearGradient
                     colors={bgGradient}

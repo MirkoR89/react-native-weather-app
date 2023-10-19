@@ -15,8 +15,8 @@ const App = () => {
 
 	return (
 		<Provider store={store}>
-			<SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
-				<StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+			<StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+			<SafeAreaView style={{ flex: 1, position: 'relative' }}>
 				<NavigationContainer>
 					<BottomNavigation />
 				</NavigationContainer>
