@@ -37,6 +37,7 @@ const Home = ({ navigation, setActive }) => {
             {
                 data &&
                 <FlatList
+                    style={{ height: '60%' }}
                     data={data}
                     renderItem={({ item }) => <WeatherCard card={item} navigation={navigation} />}
                     keyExtractor={(item) => item.name}

@@ -28,7 +28,7 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
     const handleAdd = async () => {
         setActive('Home')
         navigation.navigate('Home')
-        await dispatch(fetchDataWeather(card.name))
+        await dispatch(fetchDataWeather(card.name.split(' ')[0]))
         dispatch(clearSearchBar())
     }
 

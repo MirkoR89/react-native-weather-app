@@ -79,9 +79,17 @@ const styles = StyleSheet.create({
         margin: 20,
     },
     place: {
+        width: '40%',
         paddingLeft: 20,
     },
+    icon: {
+        alignItems: "center",
+        width: '30%',
+
+    },
     temp: {
+        width: '30%',
+        alignItems: "flex-end",
         marginTop: 10,
         paddingRight: 20,
     },
