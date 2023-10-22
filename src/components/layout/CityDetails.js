@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
-import Animated, { FadeInUp, FadeOutDown, } from "react-native-reanimated";
+import Animated, { FadeInUp } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch } from "react-redux";
 import { fetchDetails } from "../../redux/thunks/fetchData";
@@ -36,7 +36,6 @@ const CityDetails = ({ item, i, lengthList }) => {
         >
             <Animated.View
                 entering={FadeInUp.delay(i * 30)}
-                exiting={FadeOutDown.delay(i * 30)}
                 style={{
                     ...styles.container,
                     borderBottomWidth: i !== lengthList ? 1 : 0,

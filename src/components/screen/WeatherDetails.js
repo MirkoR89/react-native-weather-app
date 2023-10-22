@@ -26,19 +26,17 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
     }
 
     const handleAdd = async () => {
-        await dispatch(fetchDataWeather(card.name))
-        dispatch(clearSearchBar())
         setActive('Home')
         navigation.navigate('Home')
+        await dispatch(fetchDataWeather(card.name))
+        dispatch(clearSearchBar())
     }
 
     const handleRemove = () => {
         navigation.navigate('Home')
         setActive('Home')
         dispatch(clearSearchBar())
-        setTimeout(() => {
-            dispatch(removeCard(card.name))
-        }, 1000)
+        dispatch(removeCard(card.name))
     }
 
     return (

@@ -39,7 +39,7 @@ export const fetchDetails = createAsyncThunk('api/fetchDetails', async (coord) =
 
 export const fetchCitiesList = createAsyncThunk('api/fetchCitiesList', async (cityName) => {
     try {
-        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=8&appid=${apiKey}`);
+        const response = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=10&appid=${apiKey}`);
 
         return response.data.map(item => (
             {
