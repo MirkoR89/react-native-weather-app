@@ -23,7 +23,7 @@ const Home = ({ navigation, setActive }) => {
                     </Text>
                 </View>
                 <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.Ripple('#d1d5db')}
+                    background={TouchableNativeFeedback.Ripple('#d1d5db', false, 80)}
                     onPress={handleNavigate}
                 >
                     <View style={styles.plus}>
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     plus: {
+        paddingHorizontal: 100,
         flexDirection: "row",
         alignItems: 'center',
         justifyContent: 'center',

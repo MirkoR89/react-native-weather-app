@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
+import Animated, { BounceInRight, BounceOutLeft } from "react-native-reanimated";
 import { Shadow } from 'react-native-shadow-2';
 import { useDispatch } from "react-redux";
 import { fetchDetails } from "../../redux/thunks/fetchData";
@@ -18,46 +19,51 @@ const WeatherCard = ({ card, navigation }) => {
     }
 
     return (
-        <Pressable
-            title={card.name}
-            onPress={handleDetails}
+        <Animated.View
+            entering={BounceInRight}
+            exiting={BounceOutLeft}
         >
-            <Shadow
-                distance={7}
-                startColor="rgba(0, 0, 0, 0.17)"
-                offset={[20, 20]}
+            <Pressable
+                title={card.name}
+                onPress={handleDetails}
             >
-                <LinearGradient
-                    colors={bgGradient}
-                    style={styles.container}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                <Shadow
+                    distance={7}
+                    startColor="rgba(0, 0, 0, 0.17)"
+                    offset={[20, 20]}
                 >
-                    <View style={styles.place}>
-                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26, lineHeight: 39 }}>
-                            {truncate(card.name, 8)}
-                        </Text>
-                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15, marginBottom: -7 }}>
-                            {card.date},
-                        </Text>
-                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
-                            {card.day}
-                        </Text>
-                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
-                            {`${card.time.split(' ')[0]} ${card.time.split(' ')[0] === 'AM' ? 'a.m.' : 'p.m.'}`}
-                        </Text>
-                    </View>
-                    <View style={styles.icon}>
-                        <Image source={icon} />
-                    </View>
-                    <View style={styles.temp}>
-                        <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
-                            {`${card.temp}°`}
-                        </Text>
-                    </View>
-                </LinearGradient>
-            </Shadow>
-        </Pressable>
+                    <LinearGradient
+                        colors={bgGradient}
+                        style={styles.container}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                    >
+                        <View style={styles.place}>
+                            <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 26, lineHeight: 39 }}>
+                                {truncate(card.name, 8)}
+                            </Text>
+                            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15, marginBottom: -7 }}>
+                                {card.date},
+                            </Text>
+                            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                                {card.day}
+                            </Text>
+                            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 12 }}>
+                                {`${card.time.split(' ')[0]} ${card.time.split(' ')[0] === 'AM' ? 'a.m.' : 'p.m.'}`}
+                            </Text>
+                        </View>
+                        <View style={styles.icon}>
+                            <Image source={icon} />
+                        </View>
+                        <View style={styles.temp}>
+                            <Text style={{ color: '#FFF', fontFamily: 'Poppins-Bold', fontSize: 50 }}>
+                                {`${card.temp}°`}
+                            </Text>
+                        </View>
+                    </LinearGradient>
+                </Shadow>
+            </Pressable>
+        </Animated.View>
     )
 }
 

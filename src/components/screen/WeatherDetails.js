@@ -1,5 +1,5 @@
 
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/AntDesign';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,6 +15,7 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
     const { card, bgGradient, icon, search } = route.params;
     const { details } = useSelector(state => state.data);
     const { data } = useSelector(state => state.data);
+    const addDeleteIcon = search && !data.some(item => item.name === card.name)
 
     const dispatch = useDispatch()
 
@@ -31,11 +32,13 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
         navigation.navigate('Home')
     }
 
-    const handleRemove = async () => {
-        await dispatch(removeCard(card.name))
-        dispatch(clearSearchBar())
-        setActive('Home')
+    const handleRemove = () => {
         navigation.navigate('Home')
+        setActive('Home')
+        dispatch(clearSearchBar())
+        setTimeout(() => {
+            dispatch(removeCard(card.name))
+        }, 1000)
     }
 
     return (
@@ -47,19 +50,29 @@ const WeatherDetails = ({ route, navigation, setActive }) => {
         >
             <View style={styles.content}>
                 <View style={styles.textArea}>
-                    <Pressable onPress={handleBack} >
-                        <Icon name="arrowleft" size={30} color="#FFF" />
-                    </Pressable>
+                    <TouchableNativeFeedback
+                        background={TouchableNativeFeedback.Ripple('rgb(209, 213, 219, 0.9)', false, 30)}
+                        onPress={handleBack}
+                    >
+                        <View style={{ padding: 20 }}>
+                            <Icon name="arrowleft" size={30} color="#FFF" />
+                        </View>
+                    </TouchableNativeFeedback>
                     <Text style={{ color: '#FFF', fontFamily: 'Poppins-SemiBold', fontSize: 32 }}>{card.name}</Text>
-                    {
-                        search && !data.some(item => item.name === card.name) ?
-                            <Pressable onPress={handleAdd} >
-                                <Icon name="pluscircleo" size={30} color="#FFF" />
-                            </Pressable> :
-                            <Pressable onPress={handleRemove} >
-                                <MIcon name="delete" size={30} color="#FFF" />
-                            </Pressable>
-                    }
+                    <TouchableNativeFeedback
+                        background={TouchableNativeFeedback.Ripple('rgb(209, 213, 219, 0.9)', false, 30)}
+                        onPress={addDeleteIcon ? handleAdd : handleRemove}
+                    >
+                        {
+                            addDeleteIcon ?
+                                <View style={{ padding: 20 }} >
+                                    <Icon name="pluscircleo" size={30} color="#FFF" />
+                                </View> :
+                                <View style={{ padding: 20 }}>
+                                    <MIcon name="delete" size={30} color="#FFF" />
+                                </View>
+                        }
+                    </TouchableNativeFeedback>
                 </View>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Medium', fontSize: 20 }}>{`${card.day}, ${card.date}`}</Text>
                 <Text style={{ color: '#FFF', fontFamily: 'Poppins-Light', fontSize: 20, marginTop: 10 }}>{card.weather.main}</Text>
@@ -94,7 +107,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         paddingTop: 20,
-        paddingHorizontal: 20,
         marginTop: 40,
     },
     textArea: {

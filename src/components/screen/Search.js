@@ -16,9 +16,10 @@ const Search = ({ route, navigation }) => {
     const [value, setValue] = useState('')
     const inputRef = useRef(null);
     const _addCity = route.params?.addCity;
+
     const handleSearch = text => {
         setValue(text)
-        if (text.length === 0) return dispatch(clearSearchBar())
+        if (!text.length) return dispatch(clearSearchBar())
         else if (text.length < 3) return
         return dispatch(fetchCitiesList(text))
     }

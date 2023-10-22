@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
+import Animated, { FadeInUp, FadeOutDown, } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useDispatch } from "react-redux";
 import { fetchDetails } from "../../redux/thunks/fetchData";
@@ -14,8 +15,8 @@ const CityDetails = ({ item, i, lengthList }) => {
         const _data = await dispatch((fetchDetails(item.coord)))
         const data = _data.payload
 
-        const bgGradient = getBgAndIcon(data.current.weather.icon).bgGradient
-        const icon = getBgAndIcon(data.current.weather.icon).icon
+        const bgGradient = getBgAndIcon(data.current.weather[0].icon).bgGradient
+        const icon = getBgAndIcon(data.current.weather[0].icon).icon
 
         const card = {
             name: item.name,
@@ -33,7 +34,9 @@ const CityDetails = ({ item, i, lengthList }) => {
             background={TouchableNativeFeedback.Ripple('#d1d5db')}
             onPress={hanldeAddCity}
         >
-            <View
+            <Animated.View
+                entering={FadeInUp.delay(i * 30)}
+                exiting={FadeOutDown.delay(i * 30)}
                 style={{
                     ...styles.container,
                     borderBottomWidth: i !== lengthList ? 1 : 0,
@@ -46,8 +49,8 @@ const CityDetails = ({ item, i, lengthList }) => {
                     <Text style={{ color: '#464C64', fontFamily: 'Poppins-Light', fontSize: 14 }}>{`${item.state || 'not available'} - ${item.country || 'not available'}`}</Text>
                 </View>
                 <Icon name="pluscircle" size={25} color="#01175F" />
-            </View>
-        </TouchableNativeFeedback>
+            </Animated.View>
+        </TouchableNativeFeedback >
     )
 }
 
